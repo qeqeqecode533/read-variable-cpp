@@ -107,6 +107,6 @@ Contributions are welcome! To contribute:
 5. For bugs or feature requests, open an issue with detailed information.
 
 ## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. Use at your own risk—no warranty is provided.
+This project is unlicensed and free to use for educational or personal purposes. No warranty is provided—use at your own risk!
 
 ---
