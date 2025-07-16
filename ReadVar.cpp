@@ -6,13 +6,6 @@
 
 using namespace std;
 
-template <typename T> void ptl(T msg) {
-    cout << msg << endl;
-}
-template <typename T> void pt(T msg) {
-    cout << msg;
-}
-
 // Making robust input handling functions here
 string readLine(const string &prompt, string reprompt) {
     reprompt = reprompt.empty() ? prompt : reprompt;
@@ -35,7 +28,7 @@ int readInt(int min, int max, const string &prompt, string reprompt) {
         try {
             in = stoi(input);
             if (in < min || in > max) {
-                continue; // Out of range, reprompt
+                throw out_of_range("Input out of range");
             }
             break; // Valid input
         } catch (const invalid_argument &) {
@@ -64,7 +57,7 @@ double readDouble(double min, double max, const string &prompt, string reprompt)
         try {
             in = stod(input);
             if (in < min || in > max) {
-                continue; // Out of range, reprompt
+                  throw out_of_range("Input out of range");; // Out of range, reprompt
             }
             break; // Valid input
         } catch (const invalid_argument &) {
@@ -93,7 +86,7 @@ float readFloat(float min, float max, const string &prompt, string reprompt) {
         try {
             in = stof(input);
             if (in < min || in > max) {
-                continue; // Out of range, reprompt
+                  throw out_of_range("Input out of range");; // Out of range, reprompt
             }
             break; // Valid input
         } catch (const invalid_argument &) {
