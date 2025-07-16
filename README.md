@@ -108,5 +108,3 @@ Contributions are welcome! To contribute:
 
 ## License
 This project is unlicensed and free to use for educational or personal purposes. No warranty is provided—use at your own risk!
-
----
