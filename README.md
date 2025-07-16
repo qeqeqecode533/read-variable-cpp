@@ -15,7 +15,7 @@
 - No external dependencies.
 
 ## Installation
-1. Download the `ReadVar.h` and `ReadVar.cpp` files from this [repository](https://github.com/your-username/readVar-cpp).
+1. Download the `ReadVar.h` and `ReadVar.cpp` files from this [repository](https://github.com/qeqeqecode533/read-variable-cpp).
 2. Place them in your C++ project directory (e.g., `src/` for CMake projects).
 3. Include the header in your code:
    ```cpp
@@ -110,5 +110,3 @@ Contributions are welcome! To contribute:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. Use at your own risk—no warranty is provided.
 
 ---
-
-*Repository URL*: Replace `https://github.com/your-username/readVar-cpp` with the actual repository link.
