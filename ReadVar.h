@@ -2,13 +2,30 @@
 #define READVAR_H
 
 #include <string>
+#include <iostream> // Added for pt and ptl
 
 // === Output functions ===
 template <typename T>
-void pt(T msg);
+void pt(T msg) {
+    std::cout << msg;
+}
+inline void pt(const std::string& msg) {
+    std::cout << msg;
+}
+inline void pt(const char* msg) {
+    std::cout << msg;
+}
 
 template <typename T>
-void ptl(T msg);
+void ptl(T msg) {
+    std::cout << msg << std::endl;
+}
+inline void ptl(const std::string& msg) {
+    std::cout << msg << std::endl;
+}
+inline void ptl(const char* msg) {
+    std::cout << msg << std::endl;
+}
 
 // === Input reading functions ===
 std::string readLine(const std::string &prompt = "", std::string reprompt = "");
