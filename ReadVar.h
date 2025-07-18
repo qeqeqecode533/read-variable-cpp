@@ -1,29 +1,27 @@
 #ifndef READVAR_H
 #define READVAR_H
 
-#include <string>
 #include <iostream> // Added for pt and ptl
+#include <string>
 
 // === Output functions ===
-template <typename T>
-void pt(T msg) {
+template <typename T> void pt(T msg) {
     std::cout << msg;
 }
-inline void pt(const std::string& msg) {
+inline void pt(const std::string &msg) {
     std::cout << msg;
 }
-inline void pt(const char* msg) {
+inline void pt(const char *msg) {
     std::cout << msg;
 }
 
-template <typename T>
-void ptl(T msg) {
+template <typename T> void ptl(T msg) {
     std::cout << msg << std::endl;
 }
-inline void ptl(const std::string& msg) {
+inline void ptl(const std::string &msg) {
     std::cout << msg << std::endl;
 }
-inline void ptl(const char* msg) {
+inline void ptl(const char *msg) {
     std::cout << msg << std::endl;
 }
 
@@ -44,5 +42,7 @@ float readFloat(const std::string &prompt = "", const std::string &reprompt = ""
 
 bool equalsIgnoreCase(const std::string &a, const std::string &b);
 bool readBool(const std::string &prompt = "", std::string reprompt = "");
+
+char readChar(const std::string &prompt = "", std::string reprompt = "");
 
 #endif // READVAR_H
