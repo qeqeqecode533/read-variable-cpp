@@ -57,7 +57,8 @@ double readDouble(double min, double max, const string &prompt, string reprompt)
         try {
             in = stod(input);
             if (in < min || in > max) {
-                  throw out_of_range("Input out of range");; // Out of range, reprompt
+                throw out_of_range("Input out of range");
+                ; // Out of range, reprompt
             }
             break; // Valid input
         } catch (const invalid_argument &) {
@@ -86,7 +87,8 @@ float readFloat(float min, float max, const string &prompt, string reprompt) {
         try {
             in = stof(input);
             if (in < min || in > max) {
-                  throw out_of_range("Input out of range");; // Out of range, reprompt
+                throw out_of_range("Input out of range");
+                ; // Out of range, reprompt
             }
             break; // Valid input
         } catch (const invalid_argument &) {
@@ -125,6 +127,20 @@ bool readBool(const string &prompt, string reprompt) {
         } else if (equalsIgnoreCase(input, "no") || equalsIgnoreCase(input, "n") || equalsIgnoreCase(input, "false")) {
             return false;
         } else {
+            pt(reprompt);
+            getline(cin, input);
+        }
+    }
+}
+char readChar(const string &prompt, string reprompt) {
+    reprompt = reprompt.empty() ? prompt : reprompt;
+    string input;
+    pt(prompt);
+    getline(cin, input);
+    while (true) {
+        try {
+            return input.at(0);
+        } catch (const out_of_range &) {
             pt(reprompt);
             getline(cin, input);
         }
