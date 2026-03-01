@@ -1,148 +1,202 @@
-#include "ReadVar.h"
-#include <cctype>
+#include "readvar.h"
 #include <iostream>
 #include <limits>
 #include <string>
+#include <stdexcept>
+#include <algorithm>
+#include <cctype>
 
-using namespace std;
+using ll = long long;
+namespace readvar {
+void ptl(const std::string& text) {
+    std::cout << text << std::endl;
+}
 
-// Making robust input handling functions here
-string readLine(const string &prompt, string reprompt) {
-    reprompt = reprompt.empty() ? prompt : reprompt;
-    string in;
+void ptl() {
+    std::cout << std::endl;
+}
+
+void pt(const std::string& text) {
+    std::cout << text;
+}
+
+int readInt(int min, int max, const std::string& prompt, const std::string& reprompt) {
+    if (min > max) {
+        throw std::invalid_argument("Minimum value cannot be greater than maximum value.");
+    }
+    std::string line;
+    int value;
+    bool first = true;
+    while (true) {
+        pt(first ? prompt : reprompt);
+        std::getline(std::cin, line);
+        size_t idx;
+        try {
+            value = std::stoi(line, &idx);
+            if (idx == line.length() && value >= min && value <= max) {
+                return value;
+            }
+        } catch (const std::invalid_argument &e) {
+            // invalid input, continue to reprompt
+        } catch (const std::out_of_range &e) {
+            // input is out of range for int, continue to reprompt
+        }
+        first = false;
+    }
+}
+int readInt(int min, const std::string& prompt, const std::string& reprompt) {
+    return readInt(min, std::numeric_limits<int>::max(), prompt, reprompt);
+}
+int readInt(const std::string& prompt, const std::string& reprompt) {
+    return readInt(std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), prompt, reprompt);
+}
+int readInt(const std::string& prompt) {
+    return readInt(std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), prompt, prompt);
+}
+int readInt() {
+    return readInt(std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), "", "");
+}
+ll readLongLong(ll min, ll max, const std::string& prompt, const std::string& reprompt) {
+    if (min > max) {
+        throw std::invalid_argument("Minimum value cannot be greater than maximum value.");
+    }
+    std::string line;
+    ll value;
+    bool first = true;
+    while (true) {
+        pt(first ? prompt : reprompt);
+        std::getline(std::cin, line);
+        size_t idx;
+        try {
+            value = std::stoll(line, &idx);
+            if (idx == line.length() && value >= min && value <= max) {
+                return value;
+            }
+        } catch (const std::invalid_argument &e) {
+            // invalid input, continue to reprompt
+        } catch (const std::out_of_range &e) {
+            // input is out of range for long long, continue to reprompt
+        }
+        first = false;
+    }
+}
+ll readLongLong(ll min, const std::string& prompt, const std::string& reprompt) {
+    return readLongLong(min, std::numeric_limits<ll>::max(), prompt, reprompt);
+}
+ll readLongLong(const std::string& prompt, const std::string& reprompt) {
+    return readLongLong(std::numeric_limits<ll>::min(), std::numeric_limits<ll>::max(), prompt, reprompt);
+}
+ll readLongLong(const std::string& prompt) {
+    return readLongLong(std::numeric_limits<ll>::min(), std::numeric_limits<ll>::max(), prompt, prompt);
+}
+ll readLongLong() {
+    return readLongLong(std::numeric_limits<ll>::min(), std::numeric_limits<ll>::max(), "", "");
+}
+float readFloat(float min, float max, const std::string& prompt, const std::string& reprompt) {
+    if (min > max) {
+        throw std::invalid_argument("Minimum value cannot be greater than maximum value.");
+    }
+    std::string line;
+    float value;
+    bool first = true;
+    while (true) {
+        pt(first ? prompt : reprompt);
+        std::getline(std::cin, line);
+        try {
+            value = std::stof(line);
+            if (value >= min && value <= max) {
+                return value;
+            }
+        } catch (const std::invalid_argument &e) {
+            // invalid input, continue to reprompt
+        } catch (const std::out_of_range &e) {
+            // input is out of range for float, continue to reprompt
+        }
+        first = false;
+    }
+}
+float readFloat(float min, const std::string& prompt, const std::string& reprompt) {
+    return readFloat(min, std::numeric_limits<float>::max(), prompt, reprompt);
+}
+float readFloat(const std::string& prompt, const std::string& reprompt) {
+    return readFloat(std::numeric_limits<float>::min(), std::numeric_limits<float>::max(), prompt, reprompt);
+}
+float readFloat(const std::string& prompt) {
+    return readFloat(std::numeric_limits<float>::min(), std::numeric_limits<float>::max(), prompt, prompt);
+}
+float readFloat() {
+    return readFloat(std::numeric_limits<float>::min(), std::numeric_limits<float>::max(), "", "");
+}
+double readDouble(double min, double max, const std::string& prompt, const std::string& reprompt) {
+    if (min > max) {
+        throw std::invalid_argument("Minimum value cannot be greater than maximum value.");
+    }
+    std::string line;
+    double value;
+    bool first = true;
+    while (true) {
+        pt(first ? prompt : reprompt);
+        std::getline(std::cin, line);
+        try {
+            value = std::stod(line);
+            if (value >= min && value <= max) {
+                return value;
+            }
+        } catch (const std::invalid_argument &e) {
+            // invalid input, continue to reprompt
+        } catch (const std::out_of_range &e) {
+            // input is out of range for double, continue to reprompt
+        }
+        first = false;
+    }
+}
+double readDouble(double min, const std::string& prompt, const std::string& reprompt) {
+    return readDouble(min, std::numeric_limits<double>::max(), prompt, reprompt);
+}
+double readDouble(const std::string& prompt, const std::string& reprompt) {
+    return readDouble(std::numeric_limits<double>::min(), std::numeric_limits<double>::max(), prompt, reprompt);
+}
+double readDouble(const std::string& prompt) {
+    return readDouble(std::numeric_limits<double>::min(), std::numeric_limits<double>::max(), prompt, prompt);
+}
+double readDouble() {
+    return readDouble(std::numeric_limits<double>::min(), std::numeric_limits<double>::max(), "", "");
+}
+std::string readString(const std::string& prompt, const std::string& reprompt) {
+    std::string line;
     pt(prompt);
-    getline(cin, in);
-    while (in.empty()) {
+    std::getline(std::cin, line);
+    while (line.empty()) {
         pt(reprompt);
-        getline(cin, in);
+        std::getline(std::cin, line);
     }
-    return in;
+    return line;
 }
-int readInt(int min, int max, const string &prompt, string reprompt) {
-    reprompt = reprompt.empty() ? prompt : reprompt;
-    int in;
+std::string readString(const std::string& prompt) {
+    return readString(prompt, prompt);
+}
+std::string readString() {
+    return readString("", "");
+}
+bool readBool(const std::string& prompt, const std::string& reprompt) {
+    std::string line;
     pt(prompt);
-    string input;
-    getline(cin, input);
+    std::getline(std::cin, line);
     while (true) {
-        try {
-            in = stoi(input);
-            if (in < min || in > max) {
-                throw out_of_range("Input out of range");
-            }
-            break; // Valid input
-        } catch (const invalid_argument &) {
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
+        for (char& c : line) c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+        if (line == "y" || line == "yes" || line == "true" || line == "t" || line == "1") return true;
+        else if (line == "n" || line == "no" || line == "false" || line == "f" || line == "0") return false;
+        else {
             pt(reprompt);
-            getline(cin, input);
-        } catch (const out_of_range &) {
-            pt(reprompt);
-            getline(cin, input);
-        }
-    }
-    return in;
-}
-int readInt(int min, const string &prompt, const string &reprompt) {
-    return readInt(min, numeric_limits<int>::max(), prompt, reprompt);
-}
-int readInt(const string &prompt, const string &reprompt) {
-    return readInt(numeric_limits<int>::lowest(), numeric_limits<int>::max(), prompt, reprompt);
-}
-double readDouble(double min, double max, const string &prompt, string reprompt) {
-    reprompt = reprompt.empty() ? prompt : reprompt;
-    double in;
-    pt(prompt);
-    string input;
-    getline(cin, input);
-    while (true) {
-        try {
-            in = stod(input);
-            if (in < min || in > max) {
-                throw out_of_range("Input out of range");
-                ; // Out of range, reprompt
-            }
-            break; // Valid input
-        } catch (const invalid_argument &) {
-            pt(reprompt);
-            getline(cin, input);
-        } catch (const out_of_range &) {
-            pt(reprompt);
-            getline(cin, input);
-        }
-    }
-    return in;
-}
-double readDouble(double min, const string &prompt, const string &reprompt) {
-    return readDouble(min, numeric_limits<double>::max(), prompt, reprompt);
-}
-double readDouble(const string &prompt, const string &reprompt) {
-    return readDouble(numeric_limits<double>::lowest(), numeric_limits<double>::max(), prompt, reprompt);
-}
-float readFloat(float min, float max, const string &prompt, string reprompt) {
-    reprompt = reprompt.empty() ? prompt : reprompt;
-    float in;
-    pt(prompt);
-    string input;
-    getline(cin, input);
-    while (true) {
-        try {
-            in = stof(input);
-            if (in < min || in > max) {
-                throw out_of_range("Input out of range");
-                ; // Out of range, reprompt
-            }
-            break; // Valid input
-        } catch (const invalid_argument &) {
-            pt(reprompt);
-            getline(cin, input);
-        } catch (const out_of_range &) {
-            pt(reprompt);
-            getline(cin, input);
-        }
-    }
-    return in;
-}
-float readFloat(float min, const string &prompt, const string &reprompt) {
-    return readFloat(min, numeric_limits<float>::max(), prompt, reprompt);
-}
-float readFloat(const string &prompt, const string &reprompt) {
-    return readFloat(numeric_limits<float>::lowest(), numeric_limits<float>::max(), prompt, reprompt);
-}
-bool equalsIgnoreCase(const string &a, const string &b) {
-    if (a.length() != b.length())
-        return false;
-    for (size_t i = 0; i < a.length(); ++i) {
-        if (std::tolower(a[i]) != std::tolower(b[i]))
-            return false;
-    }
-    return true;
-}
-bool readBool(const string &prompt, string reprompt) {
-    reprompt = reprompt.empty() ? prompt : reprompt;
-    string input;
-    pt(prompt);
-    getline(cin, input);
-    while (true) {
-        if (equalsIgnoreCase(input, "yes") || equalsIgnoreCase(input, "y") || equalsIgnoreCase(input, "true")) {
-            return true;
-        } else if (equalsIgnoreCase(input, "no") || equalsIgnoreCase(input, "n") || equalsIgnoreCase(input, "false")) {
-            return false;
-        } else {
-            pt(reprompt);
-            getline(cin, input);
+            std::getline(std::cin, line);
         }
     }
 }
-char readChar(const string &prompt, string reprompt) {
-    reprompt = reprompt.empty() ? prompt : reprompt;
-    string input;
-    pt(prompt);
-    getline(cin, input);
-    while (true) {
-        try {
-            return input.at(0);
-        } catch (const out_of_range &) {
-            pt(reprompt);
-            getline(cin, input);
-        }
-    }
+bool readBool(const std::string& prompt) {
+    return readBool(prompt, prompt);
 }
+bool readBool() {
+    return readBool("", "");
+}
+} // namespace readvar
